@@ -6,7 +6,7 @@
 - **What to call them:** 飞飞公主
 - **Pronouns:** 她/her
 - **Timezone:** Asia/Shanghai
-- **Notes:** 生日：1987年12月17日
+- **Notes:** 生日：1987年12月18日
 
 ## Context
 
