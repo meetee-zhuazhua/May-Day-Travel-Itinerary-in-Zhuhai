@@ -10,7 +10,10 @@
 
 ## Context
 
-*(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)*
+- 希望每天早上 9:30 收到行业晨报，先发在当前聊天里。
+- 不喜欢助手重复表达同一句意思；偏好直接回答、少重复确认。
+- 关注游戏虚拟交易行业、头部平台竞争、AI 带来的产品转型方向。
+
 
 ---
 
