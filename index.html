@@ -19,12 +19,18 @@
             background-position: center;
             color: white;
             border-radius: 15px;
-            position: relative;
-            overflow: hidden;
         }
         
         .header h1 { font-size: 2.8em; margin-bottom: 15px; font-weight: 800; }
         .header p { font-size: 1.3em; opacity: 0.95; }
+        
+        .intro {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
         
         .day-card {
             background: white;
@@ -37,6 +43,7 @@
         
         .day-header {
             padding: 20px;
+            background: rgba(255, 107, 107, 0.05);
             border-bottom: 1px solid #eee;
         }
         
@@ -50,6 +57,7 @@
         .day-number {
             width: 40px;
             height: 40px;
+            background: #ff6b6b;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -107,6 +115,7 @@
         .schedule-bullet {
             width: 12px;
             height: 12px;
+            background: #ff6b6b;
             border-radius: 50%;
             border: 2px solid white;
             flex-shrink: 0;
@@ -120,6 +129,7 @@
         }
         
         .weather {
+            background: rgba(255, 107, 107, 0.1);
             padding: 15px;
             border-radius: 10px;
             margin-top: 20px;
@@ -165,42 +175,6 @@
             .spot-image { height: 200px; min-width: 100%; }
             .map-button { display: block; margin: 10px 0; width: 100%; }
         }
-        
-        /* 日期颜色 */
-        .day-1 { border-left-color: #ff6b6b; }
-        .day-2 { border-left-color: #4ecdc4; }
-        .day-3 { border-left-color: #ffd166; }
-        .day-4 { border-left-color: #06d6a0; }
-        .day-5 { border-left-color: #118ab2; }
-        .day-6 { border-left-color: #9d4edd; }
-        
-        .day-1 .day-number { background: #ff6b6b; }
-        .day-2 .day-number { background: #4ecdc4; }
-        .day-3 .day-number { background: #ffd166; }
-        .day-4 .day-number { background: #06d6a0; }
-        .day-5 .day-number { background: #118ab2; }
-        .day-6 .day-number { background: #9d4edd; }
-        
-        .day-1 .day-header { background: rgba(255, 107, 107, 0.05); }
-        .day-2 .day-header { background: rgba(78, 205, 196, 0.05); }
-        .day-3 .day-header { background: rgba(255, 209, 102, 0.05); }
-        .day-4 .day-header { background: rgba(6, 214, 160, 0.05); }
-        .day-5 .day-header { background: rgba(17, 138, 178, 0.05); }
-        .day-6 .day-header { background: rgba(157, 78, 221, 0.05); }
-        
-        .day-1 .schedule-bullet { background: #ff6b6b; }
-        .day-2 .schedule-bullet { background: #4ecdc4; }
-        .day-3 .schedule-bullet { background: #ffd166; }
-        .day-4 .schedule-bullet { background: #06d6a0; }
-        .day-5 .schedule-bullet { background: #118ab2; }
-        .day-6 .schedule-bullet { background: #9d4edd; }
-        
-        .day-1 .weather { background: rgba(255, 107, 107, 0.1); }
-        .day-2 .weather { background: rgba(78, 205, 196, 0.1); }
-        .day-3 .weather { background: rgba(255, 209, 102, 0.1); }
-        .day-4 .weather { background: rgba(6, 214, 160, 0.1); }
-        .day-5 .weather { background: rgba(17, 138, 178, 0.1); }
-        .day-6 .weather { background: rgba(157, 78, 221, 0.1); }
     </style>
 </head>
 <body>
@@ -211,8 +185,14 @@
             <p>2026年5月2日 - 5月7日 | 一家三口亲子游</p>
         </div>
         
+        <!-- 介绍 -->
+        <div class="intro">
+            <h2>🎯 行程概览</h2>
+            <p>6天5晚的珠海家庭游，包含海岛探索、文化体验、主题乐园和美食之旅。行程设计兼顾亲子互动和休闲放松。</p>
+        </div>
+        
         <!-- Day 1 -->
-        <div class="day-card day-1">
+        <div class="day-card">
             <div class="day-header">
                 <div class="day-title">
                     <div class="day-number">1</div>
@@ -276,7 +256,7 @@
         </div>
         
         <!-- Day 2 -->
-        <div class="day-card day-2">
+        <div class="day-card">
             <div class="day-header">
                 <div class="day-title">
                     <div class="day-number">2</div>
@@ -340,7 +320,7 @@
         </div>
         
         <!-- Day 3 -->
-        <div class="day-card day-3">
+        <div class="day-card">
             <div class="day-header">
                 <div class="day-title">
                     <div class="day-number">3</div>
@@ -363,4 +343,51 @@
                         <li class="schedule-item">
                             <div class="schedule-bullet"></div>
                             <div class="schedule-emoji">🍵</div>
-                            <div><strong>上午：
+                            <div><strong>上午：</strong>体验广式早茶文化 🥟</div>
+                        </li>
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🏞️</div>
+                            <div><strong>上午：</strong>参观圆明新园 🏯</div>
+                        </li>
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🗽</div>
+                            <div><strong>下午：</strong>珠海渔女雕像拍照 📸</div>
+                        </li>
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🎭</div>
+                            <div><strong>傍晚：</strong>日月贝歌剧院外观 🎵</div>
+                        </li>
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🍽️</div>
+                            <div><strong>晚餐：</strong>珠海特色餐厅 🍲</div>
+                        </li>
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🍔</div>
+                            <div><strong>夜宵：</strong>小吃街或酒店自助餐 🍢</div>
+                        </li>
+                    </ul>
+                    
+                    <div class="weather">
+                        <div class="weather-emoji">☀️</div>
+                        <div>
+                            <strong>天气预测：</strong>晴朗，26-30°C<br>
+                            <small>建议：休闲装，相机，遮阳伞</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Day 4 -->
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <div class="day-number">4</div>
+                    <h2>📅 Day 4：5月5日（周一）</h2>
+                </div>
+                <h3 style="color: #06d6a0;">🚗
