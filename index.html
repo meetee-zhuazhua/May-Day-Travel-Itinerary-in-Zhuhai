@@ -3,792 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>珠海长隆家庭游行程计划 - 2026年5月2-7日</title>
+    <title>珠海长隆家庭游行程计划</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #f5f7fa; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            margin-top: 20px;
-        }
-        
-        header {
+        .header {
             text-align: center;
             margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #4a90e2;
+            padding: 40px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
         }
         
-        h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #4a90e2, #63b3ed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .subtitle {
-            color: #7f8c8d;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        
-        .trip-info {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        
-        .info-item {
-            text-align: center;
-            padding: 10px;
-            min-width: 200px;
-        }
-        
-        .info-item h3 {
-            color: #4a90e2;
-            margin-bottom: 5px;
-            font-size: 1.1em;
-        }
+        .header h1 { font-size: 2.8em; margin-bottom: 15px; font-weight: 800; }
+        .header p { font-size: 1.3em; opacity: 0.95; }
         
         .day-card {
             background: white;
-            border-left: 5px solid #4a90e2;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .day-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border-left: 5px solid #ff6b6b;
         }
         
         .day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px dashed #eaeaea;
+            padding: 20px;
+            background: #fff5f5;
+            border-bottom: 1px solid #eee;
         }
         
         .day-title {
-            font-size: 1.8em;
-            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .day-number {
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             font-weight: bold;
         }
         
-        .date {
+        .day-content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .spot-image {
+            flex: 1;
+            min-width: 300px;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .spot-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+        }
+        
+        .spot-info h3 { margin: 0 0 5px 0; }
+        .spot-info p { margin: 0; opacity: 0.9; font-size: 0.9em; }
+        
+        .day-details {
+            flex: 2;
+            min-width: 300px;
+            padding: 25px;
+        }
+        
+        .schedule-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .schedule-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .schedule-bullet {
+            width: 12px;
+            height: 12px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            border: 2px solid white;
+            flex-shrink: 0;
+        }
+        
+        .schedule-emoji {
+            font-size: 1.3em;
+            width: 30px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .weather {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .weather-emoji { font-size: 2em; }
+        
+        .map-links {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .map-button {
+            display: inline-block;
+            padding: 12px 30px;
             background: #4a90e2;
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 0 10px 15px 10px;
             font-weight: bold;
         }
         
-        .time-slot {
-            display: flex;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            align-items: flex-start;
-        }
-        
-        .time {
-            font-weight: bold;
-            color: #4a90e2;
-            min-width: 80px;
-            padding-right: 15px;
-            border-right: 2px solid #eaeaea;
-        }
-        
-        .activity {
-            padding-left: 15px;
-            flex: 1;
-        }
-        
-        .activity h4 {
-            color: #2c3e50;
-            margin-bottom: 5px;
-            font-size: 1.1em;
-        }
-        
-        .activity p {
-            color: #666;
-            font-size: 0.95em;
-        }
-        
-        .highlight {
-            background: #fff9e6;
-            border-left: 4px solid #ffd166;
-            padding: 10px 15px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .note {
-            background: #e8f4fd;
-            border-left: 4px solid #4a90e2;
-            padding: 10px 15px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.9em;
+        .map-button.highlight {
+            background: #ff6b6b;
+            border: 2px solid white;
         }
         
         footer {
             text-align: center;
             margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid #eaeaea;
-            color: #7f8c8d;
+            border-top: 1px solid #eee;
+            color: #666;
             font-size: 0.9em;
         }
         
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            .day-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .date {
-                margin-top: 10px;
-            }
-            
-            .time-slot {
-                flex-direction: column;
-            }
-            
-            .time {
-                border-right: none;
-                border-bottom: 2px solid #eaeaea;
-                padding-bottom: 5px;
-                margin-bottom: 10px;
-                min-width: auto;
-            }
-            
-            .activity {
-                padding-left: 0;
-            }
+            .day-content { flex-direction: column; }
+            .spot-image { height: 200px; min-width: 100%; }
+            .map-button { display: block; margin: 10px 0; width: 100%; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="hero-banner" style="position: relative; height: 350px; border-radius: 15px; overflow: hidden; margin-bottom: 30px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
-            <!-- 阳光沙滩海边背景图片 -->
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80'); background-size: cover; background-position: center;"></div>
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🏖️ 珠海长隆家庭游行程计划</h1>
+            <p>2026年5月2日 - 5月7日 | 一家三口亲子游</p>
+        </div>
+        
+        <!-- Day 1 示例 -->
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <div class="day-number">1</div>
+                    <h2>📅 Day 1：5月2日（周五）</h2>
+                </div>
+                <h3 style="color: #ff6b6b;">🏖️ 主题：抵达珠海，海边初体验</h3>
+            </div>
             
-            <!-- 半透明遮罩层 -->
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(30, 144, 255, 0.3) 0%, rgba(0, 191, 255, 0.2) 100%);"></div>
-            
-            <!-- 主要内容 -->
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px;">
-                <h1 style="font-size: 3em; margin-bottom: 15px; color: white; font-weight: 800; letter-spacing: 1px;">🏖️ 珠海长隆家庭游行程计划</h1>
-                <p style="font-size: 1.4em; color: white; margin-bottom: 25px; font-weight: 500; opacity: 0.95;">2026年5月2日 - 5月7日 | 一家三口亲子游</p>
+            <div class="day-content">
+                <!-- 景点图片 -->
+                <div class="spot-image" style="background-image: url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+                    <div class="spot-info">
+                        <h3>🏖️ 今日亮点：情侣路海边</h3>
+                        <p>珠海最浪漫的海滨道路，傍晚散步欣赏海景和夜景</p>
+                    </div>
+                </div>
                 
-                <!-- 特色标签 -->
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
-                    <div style="padding: 10px 20px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border-radius: 25px; color: white; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.3);">🏝️ 海岛探索</div>
-                    <div style="padding: 10px 20px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border-radius: 25px; color: white; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.3);">🐬 海洋王国</div>
-                    <div style="padding: 10px 20px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border-radius: 25px; color: white; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.3);">👨‍👩‍👧 亲子时光</div>
-                    <div style="padding: 10px 20px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border-radius: 25px; color: white; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.3);">🍽️ 美食体验</div>
+                <!-- 行程详情 -->
+                <div class="day-details">
+                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">📋 详细行程：</h3>
+                    <ul class="schedule-list">
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🛫</div>
+                            <div><strong>下午：</strong>抵达珠海金湾机场</div>
+                        </li>
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🏨</div>
+                            <div><strong>傍晚：</strong>入住德龙M酒店（含早餐）</div>
+                        </li>
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🌅</div>
+                            <div><strong>晚上：</strong>情侣路海边散步，欣赏夜景</div>
+                        </li>
+                        <li class="schedule-item">
+                            <div class="schedule-bullet"></div>
+                            <div class="schedule-emoji">🍽️</div>
+                            <div><strong>晚餐：</strong>品尝珠海海鲜大餐</div>
+                        </li>
+                    </ul>
+                    
+                    <!-- 天气信息 -->
+                    <div class="weather">
+                        <div class="weather-emoji">☀️</div>
+                        <div>
+                            <strong>天气预测：</strong>晴朗，25-29°C<br>
+                            <small>建议：轻便夏装，防晒霜，遮阳帽</small>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- 底部装饰 -->
-            <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 30px; background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);"></div>
-        </div>
-        
-        <div class="trip-info">
-            <div class="info-item">
-                <h3>👨‍👩‍👦 人员</h3>
-                <p>爸爸 + 妈妈 + 5岁女儿</p>
-            </div>
-            <div class="info-item">
-                <h3>🏨 住宿</h3>
-                <p>德龙M海景酒店 + 企鹅酒店</p>
-            </div>
-            <div class="info-item">
-                <h3>🎫 门票</h3>
-                <p>海洋王国 + 飞船乐园畅玩</p>
-            </div>
-            <div class="info-item">
-                <h3>🍽️ 餐饮</h3>
-                <p>晚餐含自助，早餐灵活安排</p>
-            </div>
-        </div>
-        
-        <!-- Day 1 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-title">Day 1：抵达珠海，海边初体验</div>
-                <div class="date">5月2日（周五）</div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">10:40</div>
-                <div class="activity">
-                    <h4>北京首都机场起飞</h4>
-                    <p>航班时间：10:40-14:15，飞行约3.5小时</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">14:15</div>
-                <div class="activity">
-                    <h4>抵达珠海金湾机场</h4>
-                    <p>取行李，打车到酒店（约40分钟，120元）</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">16:30</div>
-                <div class="activity">
-                    <h4>入住德龙M海景酒店</h4>
-                    <p>要求：高楼层、安静房间、海景视野</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">18:00</div>
-                <div class="activity">
-                    <h4>海滨泳场玩沙玩水</h4>
-                    <p>酒店对面就是沙滩，孩子第一次接触珠海沙滩</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">19:30</div>
-                <div class="activity">
-                    <h4>湾仔海鲜街晚餐</h4>
-                    <p>现选现做，第一顿珠海海鲜大餐</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">21:00</div>
-                <div class="activity">
-                    <h4>情侣路夜景散步</h4>
-                    <p>看珠海渔女夜景，感受海边夜晚氛围</p>
-                </div>
-            </div>
-            
-            <div class="highlight">
-                <strong>🎯 今日重点：</strong>适应珠海气候，第一顿海鲜，初次接触沙滩
-            </div>
-            
-            <div class="note">
-                <strong>📝 注意事项：</strong>飞机上让孩子睡一会儿，抵达后多喝水适应湿度，晚餐不要吃太撑
             </div>
         </div>
         
-        <!-- Day 2 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-title">Day 2：淇澳岛自然探索</div>
-                <div class="date">5月3日（周六）</div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">08:00</div>
-                <div class="activity">
-                    <h4>酒店早餐（含）</h4>
-                    <p>吃饱好，岛上餐饮简单</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">09:30</div>
-                <div class="activity">
-                    <h4>打车到香洲港码头</h4>
-                    <p>约15分钟，25元，提前订船票！</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">10:30</div>
-                <div class="activity">
-                    <h4>坐船到淇澳岛</h4>
-                    <p>船程30分钟，提前在微信小程序"香洲港"订票</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">11:00</div>
-                <div class="activity">
-                    <h4>红树林湿地公园</h4>
-                    <p>南方特有植物生态，找螃蟹比赛，观察弹涂鱼</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">13:00</div>
-                <div class="activity">
-                    <h4>岛上农家乐午餐</h4>
-                    <p>新鲜海鲜，简单烹饪吃原味</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">14:00</div>
-                <div class="activity">
-                    <h4>白石街古村落</h4>
-                    <p>真实渔村文化，老房子、石板路、古井</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">15:00</div>
-                <div class="activity">
-                    <h4>淇澳岛沙滩玩沙玩水</h4>
-                    <p>自然沙滩，捡贝壳，看渔船</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">16:30</div>
-                <div class="activity">
-                    <h4>坐船返回珠海</h4>
-                    <p>注意最后一班船时间，提前到码头</p>
-                </div>
-            </div>
-            
-            <div class="highlight">
-                <strong>🎯 今日重点：</strong>红树林生态观察（南方特有），渔村文化体验，海岛自然风光
-            </div>
-            
-            <div class="note">
-                <strong>📝 注意事项：</strong>必须提前订船票！带齐防晒、玩沙工具、换洗衣物、零食
-            </div>
-        </div>
-        
-        <!-- Day 3 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-title">Day 3：悠闲海边 + 早茶体验</div>
-                <div class="date">5月4日（周日）</div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">09:00</div>
-                <div class="activity">
-                    <h4>外出早茶体验</h4>
-                    <p>金悦轩或太阳与海，体验广式早茶文化</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">10:30</div>
-                <div class="activity">
-                    <h4>情侣路骑行</h4>
-                    <p>租亲子自行车，沿海边骑行，随时停下拍照</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">12:00</div>
-                <div class="activity">
-                    <h4>午餐（本地特色）</h4>
-                    <p>尝试水蟹粥、横琴蚝、葡式蛋挞</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">13:30</div>
-                <div class="activity">
-                    <h4>酒店午休（重要！）</h4>
-                    <p>为明天长隆养精蓄锐</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">15:30</div>
-                <div class="activity">
-                    <h4>芒洲湿地公园</h4>
-                    <p>更多南方植物观察，靠近长隆，免费公园</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">18:30</div>
-                <div class="activity">
-                    <h4>海鲜市场自选+加工</h4>
-                    <p>深度美食体验，市场买海鲜找餐厅加工</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">20:30</div>
-                <div class="activity">
-                    <h4>海边散步，整理行李</h4>
-                    <p>最后一次海边散步，整理好所有行李</p>
-                </div>
-            </div>
-            
-            <div class="highlight">
-                <strong>🎯 今日重点：</strong>广式早茶文化，海边悠闲骑行，本地深度美食体验
-            </div>
-            
-            <div class="note">
-                <strong>📝 注意事项：</strong>早茶要早点去避免排队，午休必须，晚上整理好行李
-            </div>
-        </div>
-        
-        <!-- Day 4 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-title">Day 4：转场长隆，海洋王国初体验</div>
-                <div class="date">5月5日（周一）</div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">08:30</div>
-                <div class="activity">
-                    <h4>酒店早餐（含），退房</h4>
-                    <p>吃饱，退房，准备转场</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">10:00</div>
-                <div class="activity">
-                    <h4>打车到企鹅酒店</h4>
-                    <p>约40分钟，90元，提前约车</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">10:40</div>
-                <div class="activity">
-                    <h4>抵达企鹅酒店，寄存行李</h4>
-                    <p>入住时间15:00后，先寄存行李</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">13:00</div>
-                <div class="activity">
-                    <h4>办理入住，午休</h4>
-                    <p>如果房间好了就入住，否则先午休</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">15:00</div>
-                <div class="activity">
-                    <h4>海洋王国入园</h4>
-                    <p>下午场，人相对少，避开最热时段</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">15:30</div>
-                <div class="activity">
-                    <h4>鲸鲨馆、白鲸剧场、企鹅馆</h4>
-                    <p>重点场馆，查好表演时间</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">18:30</div>
-                <div class="activity">
-                    <h4>酒店自助晚餐（含）</h4>
-                    <p>企鹅酒店自助餐，早点去避免排队</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">20:00</div>
-                <div class="activity">
-                    <h4>海洋夜光大巡游 + 烟花秀</h4>
-                    <p>巡游19:15，烟花20:00，声音大准备耳塞</p>
-                </div>
-            </div>
-            
-            <div class="highlight">
-                <strong>🎯 今日重点：</strong>顺利转场，海洋王国初体验，夜光巡游+烟花秀
-            </div>
-            
-            <div class="note">
-                <strong>📝 注意事项：</strong>提前约车确保准时，烟花声音大准备耳塞，自助晚餐早点去
-            </div>
-        </div>
-        
-        <!-- Day 5 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-title">Day 5：海洋王国全日深度玩</div>
-                <div class="date">5月6日（周二）</div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">09:00</div>
-                <div class="activity">
-                    <h4>早餐（酒店购买或外出）</h4>
-                    <p>企鹅自助餐厅或美食广场</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">09:30</div>
-                <div class="activity">
-                    <h4>提前入园（住店客人特权）</h4>
-                    <p>比普通游客早30分钟，人最少</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">10:00</div>
-                <div class="activity">
-                    <h4>海豚湾、5D城堡影院</h4>
-                    <p>早上玩热门项目，排队时间短</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">12:30</div>
-                <div class="activity">
-                    <h4>园区内午餐</h4>
-                    <p>城堡餐厅或快餐，休息一下</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">13:30</div>
-                <div class="activity">
-                    <h4>酒店午休（必须！）</h4>
-                    <p>避免下午崩溃，保证孩子休息</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">15:30</div>
-                <div class="activity">
-                    <h4>再次入园</h4>
-                    <p>下午继续玩，避开最热时段</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">16:00</div>
-                <div class="activity">
-                    <h4>海狮剧场、游乐设施</h4>
-                    <p>旋转木马、海底互动船等温和项目</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">18:30</div>
-                <div class="activity">
-                    <h4>酒店自助晚餐（含）</h4>
-                    <p>最后一晚自助餐，早点去吃</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">20:00</div>
-                <div class="activity">
-                    <h4>再看烟花（可选）</h4>
-                    <p>如果孩子喜欢，可以再看一次烟花秀</p>
-                </div>
-            </div>
-            
-            <div class="highlight">
-                <strong>🎯 今日重点：</strong>利用住店客人提前入园特权，看全所有剧场表演，保证孩子午休
-            </div>
-            
-            <div class="note">
-                <strong>📝 注意事项：</strong>早上人最少玩热门项目，午休必须，查好各剧场表演时间
-            </div>
-        </div>
-        
-        <!-- Day 6 -->
-        <div class="day-card">
-            <div class="day-header">
-                <div class="day-title">Day 6：飞船乐园 + 返程北京</div>
-                <div class="date">5月7日（周三）</div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">07:00</div>
-                <div class="activity">
-                    <h4>起床，简单早餐</h4>
-                    <p>面包牛奶等简单食物，飞机上有餐</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">07:30</div>
-                <div class="activity">
-                    <h4>退房，寄存行李</h4>
-                    <p>快速办理退房，行李寄存前台</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">08:00</div>
-                <div class="activity">
-                    <h4>飞船乐园（快速体验）</h4>
-                    <p>开园就进，挑重点：深海探险、珊瑚秘境</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">09:30</div>
-                <div class="activity">
-                    <h4>必须离开乐园，取行李</h4>
-                    <p>时间非常紧，9:30必须离开</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">10:00</div>
-                <div class="activity">
-                    <h4>出发去机场</h4>
-                    <p>约1小时车程，考虑堵车，必须10:00出发</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">11:05</div>
-                <div class="activity">
-                    <h4>飞机起飞</h4>
-                    <p>航班：珠海→北京，飞行约3.5小时</p>
-                </div>
-            </div>
-            
-            <div class="time-slot">
-                <div class="time">14:25</div>
-                <div class="activity">
-                    <h4>抵达北京</h4>
-                    <p>取行李，回家休息，旅行结束</p>
-                </div>
-            </div>
-            
-            <div class="highlight">
-                <strong>🎯 今日重点：</strong>飞船乐园快速体验，准时赶飞机，安全返程
-            </div>
-            
-            <div class="note">
-                <strong>📝 注意事项：</strong>时间非常紧必须严格控制，9:30必须离开，10:00必须出发，提前约好车
-            </div>
-        </div>
-        
-        <div class="day-card" style="background: #f0f7ff;">
-            <div class="day-header">
-                <div class="day-title">📋 重要提醒与准备事项</div>
-            </div>
-            
-            <div class="note">
-                <strong>🌤️ 每日天气预测（基于历史数据）：</strong><br>
-                <strong>5月2日</strong>：晴，25-29°C，湿度75%<br>
-                <strong>5月3日</strong>：多云，可能有短时阵雨，24-28°C，湿度80%<br>
-                <strong>5月4日</strong>：晴间多云，25-30°C，湿度70%<br>
-                <strong>5月5日</strong>：多云转晴，26-31°C，湿度75%<br>
-                <strong>5月6日</strong>：晴，炎热，27-32°C，湿度70%<br>
-                <strong>5月7日</strong>：晴，26-31°C，湿度65%<br>
-                <em>提示：出发前用天气APP查看最新预报</em>
-            </div>
-            
-            <div class="note">
-                <strong>🎫 需提前预订：</strong><br>
-                1. 淇澳岛船票（微信小程序"香洲港"，提前3天）<br>
-                2. 长隆快速手环（可选，五一期间可能贵）<br>
-                3. 海底餐厅（可选，提前1周订）
-            </div>
-            
-            <div class="note">
-                <strong>👧 5岁女孩特别关怀：</strong><br>
-                1. 每日午休必须<br>
-                2. 防晒全套：帽子、防晒霜、太阳镜、防晒衣<br>
-                3. 玩沙工具：桶、铲子、模具<br>
-                4. 换洗衣物：多带几套（玩水会湿）<br>
-                5. 推车：可租但自带更卫生
-            </div>
-            
-            <div class="note">
-                <strong>🗺️ 行程地图：</strong><br>
-                查看可视化地图页面：<a href="zhuhai-map.html" style="color: #4a90e2; font-weight: bold;">点击查看珠海行程地图</a><br>
-                包含所有景点位置标注和每日行程可视化
-            </div>
-            
-            <div class="note">
-                <strong>💰 费用估算（不含已付）：</strong><br>
-                交通：约500元（打车+船票）<br>
-                餐饮：约2800元（早餐600+午餐1000+晚餐900+零食300）<br>
-                其他：约1000元（纪念品+应急）<br>
-                总计额外：约4300元
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin: 40px 0; padding: 25px; background: #f8f9fa; border-radius: 12px; border: 2px solid #eaeaea;">
-            <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.5em;">🗺️ 查看行程地图</h3>
-            <p style="margin-bottom: 25px; color: #666; font-size: 1.1em;">可视化地图，标注所有景点位置和每日行程</p>
-            
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;">
-                <a href="zhuhai-amap-mcp.html" style="display: inline-block; padding: 14px 35px; background: #ff6b6b; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3); border: 2px solid white;">
-                    🗺️ 高德地图版本
-                    <div style="font-size: 0.9em; opacity: 0.9; margin-top: 5px;">中文地图 · 需要API密钥</div>
-                </a>
-                
-                <a href="zhuhai-leaflet-map.html" style="display: inline-block; padding: 14px 35px; background: #4a90e2; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);">
-                    🗺️ Leaflet交互式地图
-                    <div style="font-size: 0.9em; opacity: 0.9; margin-top: 5px;">OpenStreetMap · 免费</div>
-                </a>
-                
-                <a href="zhuhai-real-map.html" style="display: inline-block; padding: 14px 35px; background: #06d6a0; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(6, 214, 160, 0.3);">
-                    🗺️ 静态地图版本
-                    <div style="font-size: 0.9em; opacity: 0.9; margin-top: 5px;">基于OpenStreetMap</div>
-                </a>
-                
-                <a href="zhuhai-map.html" style="display: inline-block; padding: 14px 35px; background: #9d4edd; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(157, 78, 221, 0.3);">
-                    🎨 抽象地图版本
-                    <div style="font-size: 0.9em; opacity: 0.9; margin-top: 5px;">交互式可视化</div>
-                </a>
-            </div>
-            
-            <p style="margin-top: 20px; color: #7f8c8d; font-size: 0.9em;">
-                💡 推荐使用真实地图版本，基于真实地理位置标注
-            </p>
+        <!-- 地图链接 -->
+        <div class="map-links">
+            <h3 style="margin-bottom: 20px;">🗺️ 查看地图导航：</h3>
+            <a href="zhuhai-amap-mcp.html" class="map-button highlight">高德地图版本</a>
+            <a href="zhuhai-leaflet-map.html" class="map-button">Leaflet地图版本</a>
+            <a href="zhuhai-real-map.html" class="map-button">静态地图版本</a>
         </div>
         
         <footer>
-            <p>行程策划：爪爪小秘书 | 最后更新：2026年4月19日</p>
-            <p>💡 提示：此HTML文件可保存到GitHub，作为静态网页托管练习</p>
+            <p>行程策划：爪爪小秘书 · 最后更新：2026年4月19日</p>
+            <p>💡 提示：点击地图链接查看详细的景点位置和导航</p>
         </footer>
     </div>
 </body>
