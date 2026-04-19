@@ -6,7 +6,7 @@
     <title>珠海高德地图导航 - 基于高德MCP</title>
     
     <!-- 高德地图 JavaScript API -->
-    <script src="https://webapi.amap.com/maps?v=2.0&key=YOUR_AMAP_API_KEY&plugin=AMap.MarkerClusterer,AMap.ToolBar,AMap.Scale"></script>
+    <script src="https://webapi.amap.com/maps?v=2.0&key=d456107058c54b073c0f944ab203e985&plugin=AMap.MarkerClusterer,AMap.ToolBar,AMap.Scale"></script>
     
     <style>
         * {
@@ -353,17 +353,10 @@
             <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">可缩放、拖动、切换地图类型、点击查看详细信息</p>
         </div>
         
-        <div class="api-notice">
-            <h3>⚠️ 需要配置高德地图API密钥</h3>
-            <p>此页面需要你的高德地图API密钥才能正常工作。</p>
-            <p><strong>配置步骤：</strong></p>
-            <ol style="text-align: left; margin: 10px 0; padding-left: 20px;">
-                <li>登录高德开放平台 (https://lbs.amap.com)</li>
-                <li>创建应用，获取Web端(JS API)的Key</li>
-                <li>将第7行代码中的 <code>YOUR_AMAP_API_KEY</code> 替换为你的密钥</li>
-                <li>在GitHub Pages设置中添加域名白名单（可选）</li>
-            </ol>
-            <p>当前使用测试密钥，地图可能无法正常显示。</p>
+        <div class="success-notice" style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center;">
+            <h3 style="color: #155724; margin-bottom: 10px;">✅ 高德地图API已配置</h3>
+            <p style="color: #0c5460;">密钥已成功配置，地图应该可以正常显示了！</p>
+            <p style="color: #0c5460; font-size: 0.9em; margin-top: 10px;">如果地图无法显示，请检查高德控制台的域名白名单设置。</p>
         </div>
         
         <div class="controls">
