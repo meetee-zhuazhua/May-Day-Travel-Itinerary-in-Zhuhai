@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宝藏品牌升级 - 产品形态图</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: #16213e;
+}
+.section {
+  max-width: 800px;
+  margin: 0 auto 50px auto;
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #e94560;
+  border-left: 4px solid #e94560;
+  padding-left: 12px;
+}
+.section-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+  padding-left: 16px;
+}
+
+/* 图1: 产品形态总览 */
+.phone-frame {
+  width: 375px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 32px;
+  border: 3px solid #1a1a2e;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+.phone-statusbar {
+  background: #1a1a2e;
+  color: #fff;
+  font-size: 11px;
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.phone-header {
+  background: linear-gradient(135deg, #e94560, #0f3460);
+  color: #fff;
+  padding: 16px 20px;
+}
+.phone-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.phone-header p {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+.phone-body {
+  background: #f8f9fa;
+  padding: 0;
+  min-height: 500px;
+}
+
+/* 搜索栏 */
+.search-bar {
+  margin: 12px 16px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 13px;
+  color: #999;
+}
+.search-icon {
+  font-size: 16px;
+}
+
+/* 管家卡片 */
+.butler-section {
+  margin: 8px 16px;
+}
+.butler-label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.butler-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.butler-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.butler-avatar.delta { background: linear-gradient(135deg, #667eea, #764ba2); }
+.butler-avatar.king { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.butler-avatar.genshin { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.butler-avatar.add { background: #f0f2f5; border: 2px dashed #ccc; }
+.butler-avatar.add span { font-size: 24px; color: #ccc; }
+.butler-info { flex: 1; }
+.butler-info h3 { font-size: 14px; font-weight: 600; }
+.butler-info p { font-size: 11px; color: #888; margin-top: 2px; }
+.butler-badge {
+  background: #fff0f3;
+  color: #e94560;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* 今日宝藏 */
+.treasure-section {
+  margin: 12px 16px;
+}
+.treasure-label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 8px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.treasure-label span { color: #e94560; font-size: 11px; }
+.treasure-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.treasure-item {
+  min-width: 140px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.treasure-img {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+.treasure-img.img1 { background: linear-gradient(135deg, #667eea20, #764ba220); }
+.treasure-img.img2 { background: linear-gradient(135deg, #f093fb20, #f5576c20); }
+.treasure-img.img3 { background: linear-gradient(135deg, #4facfe20, #00f2fe20); }
+.treasure-info {
+  padding: 8px 10px;
+}
+.treasure-info h4 { font-size: 12px; font-weight: 600; }
+.treasure-info .price { font-size: 14px; color: #e94560; font-weight: 700; margin-top: 2px; }
+.treasure-info .tag { font-size: 10px; color: #999; }
+
+/* 逛一逛 */
+.explore-section {
+  margin: 12px 16px;
+}
+.explore-label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.explore-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid #f0f0f0;
+}
+.explore-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.explore-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+}
+.explore-user span { font-size: 11px; color: #666; }
+.explore-text { font-size: 12px; color: #333; line-height: 1.6; }
+.explore-text em { color: #e94560; font-style: normal; font-weight: 500; }
+
+/* 底部tab */
+.phone-tabbar {
+  background: #fff;
+  border-top: 1px solid #eee;
+  display: flex;
+  padding: 8px 0;
+  position: sticky;
+  bottom: 0;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  font-size: 10px;
+  color: #999;
+}
+.tab-item.active { color: #e94560; }
+.tab-item .tab-icon { font-size: 18px; display: block; margin-bottom: 2px; }
+
+/* 图2: 管家对话流程图 */
+.flow-container {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+.flow-timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.flow-timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #e94560, #0f3460);
+  border-radius: 2px;
+}
+.flow-step {
+  position: relative;
+  margin-bottom: 24px;
+}
+.flow-step:last-child { margin-bottom: 0; }
+.flow-dot {
+  position: absolute;
+  left: -32px;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 1;
+}
+.flow-dot.user { background: #667eea; }
+.flow-dot.bot { background: #e94560; }
+.flow-dot.action { background: #0f3460; }
+.flow-dot.time { background: #f39c12; }
+.flow-content {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 14px 18px;
+  border: 1px solid #eef0f2;
+}
+.flow-content.user-msg {
+  background: #667eea15;
+  border-color: #667eea30;
+}
+.flow-content.bot-msg {
+  background: #e9456010;
+  border-color: #e9456025;
+}
+.flow-content.action-msg {
+  background: #0f346010;
+  border-color: #0f346020;
+}
+.flow-content.time-msg {
+  background: #fff;
+  border: 1px dashed #f39c12;
+  text-align: center;
+}
+.flow-role {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.flow-role.user-role { color: #667eea; }
+.flow-role.bot-role { color: #e94560; }
+.flow-role.action-role { color: #0f3460; }
+.flow-role.time-role { color: #f39c12; }
+.flow-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.6;
+}
+.flow-text strong { color: #e94560; }
+.flow-text .highlight { background: #e9456015; padding: 1px 6px; border-radius: 4px; font-weight: 500; }
+
+/* 图3: 用户旅程全景图 */
+.journey-container {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 20px;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+.journey-lane {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 12px;
+}
+.journey-phase {
+  text-align: center;
+  min-width: 70px;
+  padding: 8px 4px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.phase-new { background: linear-gradient(135deg, #667eea, #764ba2); }
+.phase-grow { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.phase-deep { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #1a1a2e; }
+.phase-leave { background: linear-gradient(135deg, #a8a8a8, #7f8c8d); }
+
+.journey-arrow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+.journey-step {
+  background: #f8f9fa;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: #333;
+  min-width: 90px;
+  text-align: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.journey-step.active {
+  background: #e9456010;
+  border-color: #e9456040;
+  color: #e94560;
+  font-weight: 600;
+}
+.journey-step.new-feature {
+  background: #667eea10;
+  border-color: #667eea40;
+  color: #667eea;
+  font-weight: 500;
+}
+.journey-connector {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.journey-label {
+  font-size: 12px;
+  color: #999;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed #e0e0e0;
+}
+.journey-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #666;
+}
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+.legend-dot.existing { background: #f8f9fa; border: 1px solid #e8e8e8; }
+.legend-dot.active { background: #e9456010; border: 1px solid #e9456040; }
+.legend-dot.new-feature { background: #667eea10; border: 1px solid #667eea40; }
+</style>
+</head>
+<body>
+
+<h1>📦 宝藏品牌升级 — 产品形态图</h1>
+
+<!-- 图1: 产品形态总览 -->
+<div class="section">
+  <div class="section-title">图1：产品形态总览（APP首页）</div>
+  <div class="section-desc">从"货架搜索"变成"管家+推荐+逛"</div>
+  
+  <div class="phone-frame">
+    <div class="phone-statusbar">
+      <span>9:41</span>
+      <span>🔋 100%</span>
+    </div>
+    <div class="phone-header">
+      <h2>🎮 我的游戏管家天团</h2>
+      <p>3个管家正在为你服务</p>
+    </div>
+    <div class="phone-body">
+      <!-- 搜索栏 -->
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <span>搜游戏、搜商品、问管家...</span>
+      </div>
+      
+      <!-- 管家卡片 -->
+      <div class="butler-section">
+        <div class="butler-label">我的管家</div>
+        <div class="butler-card">
+          <div class="butler-avatar delta">🎯</div>
+          <div class="butler-info">
+            <h3>三角洲管家</h3>
+            <p>哈夫币快攒够了，要不要配个改名卡？</p>
+          </div>
+          <div class="butler-badge">新消息</div>
+        </div>
+        <div class="butler-card">
+          <div class="butler-avatar king">👑</div>
+          <div class="butler-info">
+            <h3>王者管家</h3>
+            <p>差3颗星上王者，最近代练有活动</p>
+          </div>
+        </div>
+        <div class="butler-card">
+          <div class="butler-avatar genshin">⭐</div>
+          <div class="butler-info">
+            <h3>原神管家</h3>
+            <p>新版本快开了，你的原石够抽吗？</p>
+          </div>
+        </div>
+        <div class="butler-card">
+          <div class="butler-avatar add"><span>+</span></div>
+          <div class="butler-info">
+            <h3 style="color:#999">认领新游戏</h3>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 今日宝藏 -->
+      <div class="treasure-section">
+        <div class="treasure-label">今日宝藏 <span>更多 ›</span></div>
+        <div class="treasure-scroll">
+          <div class="treasure-item">
+            <div class="treasure-img img1">🎯</div>
+            <div class="treasure-info">
+              <h4>三角洲全皮肤号</h4>
+              <div class="price">¥388</div>
+              <div class="tag">🔥 今日精选</div>
+            </div>
+          </div>
+          <div class="treasure-item">
+            <div class="treasure-img img2">👑</div>
+            <div class="treasure-info">
+              <h4>王者王者号</h4>
+              <div class="price">¥256</div>
+              <div class="tag">🎯 宝藏认证</div>
+            </div>
+          </div>
+          <div class="treasure-item">
+            <div class="treasure-img img3">🏃</div>
+            <div class="treasure-info">
+              <h4>三角洲护航</h4>
+              <div class="price">¥30/小时</div>
+              <div class="tag">⭐ 纯绿安全</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 逛一逛 -->
+      <div class="explore-section">
+        <div class="explore-label">逛一逛</div>
+        <div class="explore-item">
+          <div class="explore-user">
+            <div class="explore-avatar">P</div>
+            <span>玩家小陈 · 三角洲</span>
+          </div>
+          <div class="explore-text"><em>退游忍痛出</em>，全皮肤满配，当年氪了2万，现在380出，希望给有缘人 🥺</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-tabbar">
+      <div class="tab-item active"><span class="tab-icon">🏠</span>首页</div>
+      <div class="tab-item"><span class="tab-icon">🔍</span>发现</div>
+      <div class="tab-item"><span class="tab-icon">💬</span>管家</div>
+      <div class="tab-item"><span class="tab-icon">👤</span>我的</div>
+    </div>
+  </div>
+</div>
+
+<!-- 图2: 管家对话流程图 -->
+<div class="section">
+  <div class="section-title">图2：管家对话流程 — 从买号到全链路服务</div>
+  <div class="section-desc">展示管家的"主动"和"记忆"能力</div>
+  
+  <div class="flow-container">
+    <div class="flow-timeline">
+      <div class="flow-step">
+        <div class="flow-dot user">U</div>
+        <div class="flow-content user-msg">
+          <div class="flow-role user-role">👤 用户</div>
+          <div class="flow-text">我想玩三角洲，帮我推荐个号</div>
+        </div>
+      </div>
+      
+      <div class="flow-step">
+        <div class="flow-dot bot">B</div>
+        <div class="flow-content bot-msg">
+          <div class="flow-role bot-role">🎯 三角洲管家</div>
+          <div class="flow-text">你之前玩过类似的游戏吗？新手还是老玩家？</div>
+        </div>
+      </div>
+      
+      <div class="flow-step">
+        <div class="flow-dot user">U</div>
+        <div class="flow-content user-msg">
+          <div class="flow-role user-role">👤 用户</div>
+          <div class="flow-text">新手，预算300左右</div>
+        </div>
+      </div>
+      
+      <div class="flow-step">
+        <div class="flow-dot bot">B</div>
+        <div class="flow-content bot-msg">
+          <div class="flow-role bot-role">🎯 三角洲管家</div>
+          <div class="flow-text">推荐这个新手入坑号，自带装备+200万哈夫币，上手快 👇<br><span class="highlight">🏆 三角洲新手号 · ¥288</span><br>另外新手期建议找人带你熟悉地图，我们有<span class="highlight">纯绿护航服务</span>，要不要看看？</div>
+        </div>
+      </div>
+      
+      <div class="flow-step">
+        <div class="flow-dot action">✓</div>
+        <div class="flow-content action-msg">
+          <div class="flow-role action-role">✅ 用户下单了入坑号</div>
+          <div class="flow-text">管家记住了：<strong>三角洲新手，预算300，已购入坑号</strong></div>
+        </div>
+      </div>
+      
+      <div class="flow-step">
+        <div class="flow-dot time">T</div>
+        <div class="flow-content time-msg">
+          <div class="flow-role time-role">⏰ 3天后 · 管家主动推送</div>
+          <div class="flow-text">号上手了吗？新手期建议配个<span class="highlight">改名卡</span>，好ID在交易行更好卖哦</div>
+        </div>
+      </div>
+      
+      <div class="flow-step">
+        <div class="flow-dot time">T</div>
+        <div class="flow-content time-msg">
+          <div class="flow-role time-role">⏰ 新赛季 · 管家主动推送</div>
+          <div class="flow-text">新赛季开始了！你的段位适合冲一波，要不要找<span class="highlight">护航</span>带你上分？最近有新人优惠 🎉</div>
+        </div>
+      </div>
+      
+      <div class="flow-step">
+        <div class="flow-dot time">T</div>
+        <div class="flow-content time-msg">
+          <div class="flow-role time-role">⏰ 2个月后 · 管家主动推送</div>
+          <div class="flow-text">你那个号现在<strong>涨价了</strong>！购入价288，现在市场价380+。想出手的话现在卖能多赚将近100 💰</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 图3: 用户旅程全景图 -->
+<div class="section">
+  <div class="section-title">图3：用户旅程全景图 — 从新用户到宝藏社区</div>
+  <div class="section-desc">一个玩家的完整旅程，展示"宝藏"全链路</div>
+  
+  <div class="journey-container">
+    <!-- 阶段1: 新用户 -->
+    <div class="journey-lane">
+      <div class="journey-phase phase-new">入坑期</div>
+      <div class="journey-arrow">
+        <div class="journey-step active">搜"三角洲买号"</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step active">认领三角洲管家</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step active">管家推荐入坑号</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step active">下单购买 ✅</div>
+      </div>
+    </div>
+    
+    <!-- 阶段2: 进阶 -->
+    <div class="journey-lane">
+      <div class="journey-phase phase-grow">进阶期</div>
+      <div class="journey-arrow">
+        <div class="journey-step new-feature">管家推护航 🆕</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step new-feature">买改名卡 🆕</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step new-feature">找陪玩跑刀 🆕</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step new-feature">逛一逛种草 🆕</div>
+      </div>
+    </div>
+    
+    <!-- 阶段3: 深度 -->
+    <div class="journey-lane">
+      <div class="journey-phase phase-deep">深度期</div>
+      <div class="journey-arrow">
+        <div class="journey-step active">买第二个号</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step active">找代练冲榜</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step new-feature">晒号分享 🆕</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step new-feature">认领王者管家 🆕</div>
+      </div>
+    </div>
+    
+    <!-- 阶段4: 退游 -->
+    <div class="journey-lane">
+      <div class="journey-phase phase-leave">退坑期</div>
+      <div class="journey-arrow">
+        <div class="journey-step new-feature">管家提醒涨价 🆕</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step active">一键上架卖号</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step new-feature">号卖给下一个新手 🆕</div>
+        <div class="journey-connector">→</div>
+        <div class="journey-step" style="background:#e9456015;border-color:#e9456030;color:#e94560;font-weight:600;">♻️ 循环</div>
+      </div>
+    </div>
+    
+    <div class="journey-label">图例说明</div>
+    <div class="journey-legend">
+      <div class="legend-item">
+        <div class="legend-dot existing"></div>
+        <span>已有能力（成品号交易）</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot active"></div>
+        <span>优化升级（管家串联）</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot new-feature"></div>
+        <span>🆕 新增能力（宝藏升级）</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
