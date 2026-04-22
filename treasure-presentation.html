@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宝藏品牌升级 — 产品分享</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+  background: #0a0a14;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* 幻灯片容器 */
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.slide-inner {
+  max-width: 960px;
+  width: 100%;
+}
+
+/* 导航 */
+.nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.nav-dot.active { background: #e94560; transform: scale(1.3); }
+.page-num {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  font-size: 12px;
+  color: #444;
+  z-index: 100;
+}
+
+/* 排版 */
+.slide-label {
+  font-size: 11px;
+  color: #e94560;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.slide-title {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.slide-title .accent { color: #e94560; }
+.slide-subtitle {
+  font-size: 15px;
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+
+/* 卡片 */
+.card {
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.card h3 {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+.card p, .card li {
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.8;
+}
+.card ul { padding-left: 16px; }
+.stat-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+}
+.stat-num {
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e94560, #f39c12);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* 列表 */
+.point-list { list-style: none; }
+.point-list li {
+  font-size: 14px;
+  color: #ccc;
+  padding: 10px 0;
+  border-bottom: 1px solid #1a1a2e;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  line-height: 1.6;
+}
+.point-list li:last-child { border-bottom: none; }
+.point-icon {
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+.badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-block;
+}
+.badge-red { background: #e9456020; color: #e94560; }
+.badge-blue { background: #4facfe20; color: #4facfe; }
+.badge-yellow { background: #f39c1220; color: #f39c12; }
+.badge-green { background: #2ecc7120; color: #2ecc71; }
+
+/* 对比块 */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.compare-side {
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #2a2a4a;
+}
+.compare-side h4 {
+  font-size: 14px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #2a2a4a;
+}
+.compare-side.neg h4 { color: #e94560; }
+.compare-side.pos h4 { color: #2ecc71; }
+
+/* 时间线 */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #e94560, #f39c12, #4facfe);
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -28px;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: #fff;
+  font-weight: 700;
+}
+.tl-dot.red { background: #e94560; }
+.tl-dot.yellow { background: #f39c12; }
+.tl-dot.blue { background: #4facfe; }
+.tl-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.tl-desc {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* 品牌屋（复用mockup的） */
+.brand-house {
+  background: #1a1a2e;
+  border-radius: 24px;
+  padding: 28px 20px;
+  border: 1px solid #2a2a4a;
+  text-align: center;
+}
+.brand-top {
+  background: linear-gradient(135deg, #e94560, #f39c12);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.brand-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.pillar {
+  background: #16213e;
+  border-radius: 14px;
+  padding: 16px 12px;
+  border: 1px solid #2a2a4a;
+  text-align: left;
+}
+.pillar h3 { font-size: 13px; margin-bottom: 10px; }
+.pillar.rich h3 { color: #4facfe; }
+.pillar.surprise h3 { color: #e94560; }
+.pillar.deep h3 { color: #f39c12; }
+.pillar-item {
+  font-size: 11px;
+  color: #888;
+  padding: 4px 0;
+  border-top: 1px solid #2a2a4a;
+}
+.pillar-item:first-of-type { border-top: none; }
+.pillar-item .tag {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.tag-blue { background: #4facfe30; color: #4facfe; }
+.tag-red { background: #e9456030; color: #e94560; }
+.tag-yellow { background: #f39c1230; color: #f39c12; }
+.brand-bottom {
+  background: linear-gradient(135deg, #0f3460, #16213e);
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid #4facfe30;
+}
+
+/* 手机模拟（简化版，嵌入PPT） */
+.phone-mini {
+  width: 280px;
+  background: #1a1a2e;
+  border-radius: 28px;
+  border: 2px solid #2a2a4a;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+.phone-mini-body {
+  background: #0f0f1a;
+  padding: 12px;
+  min-height: 400px;
+}
+.pm-search {
+  background: #16213e;
+  border-radius: 16px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: #444;
+  margin-bottom: 10px;
+  border: 1px solid #2a2a4a;
+}
+.pm-label {
+  font-size: 9px;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.pm-card {
+  background: #16213e;
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #2a2a4a;
+}
+.pm-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.pm-avatar.a1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+.pm-avatar.a2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.pm-avatar.a3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.pm-info h4 { font-size: 11px; color: #fff; }
+.pm-info p { font-size: 9px; color: #666; margin-top: 1px; }
+.pm-badge {
+  background: #e9456020;
+  color: #e94560;
+  font-size: 8px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.pm-skill-card {
+  background: #16213e;
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 110px;
+  border: 1px solid #2a2a4a;
+}
+.pm-skill-cover {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.pm-skill-cover.s1 { background: linear-gradient(135deg, #667eea20, #764ba220); }
+.pm-skill-cover.s2 { background: linear-gradient(135deg, #f093fb20, #f5576c20); }
+.pm-skill-info { padding: 6px 8px; }
+.pm-skill-info h5 { font-size: 9px; color: #fff; }
+.pm-skill-info .pm-price { font-size: 11px; color: #f39c12; font-weight: 700; margin-top: 2px; }
+.pm-skill-scroll { display: flex; gap: 6px; }
+
+/* 对话气泡 */
+.chat-area { max-width: 420px; }
+.chat-b {
+  margin-bottom: 10px;
+  max-width: 88%;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.chat-b.user {
+  margin-left: auto;
+  background: #667eea;
+  border-radius: 14px 14px 4px 14px;
+  padding: 8px 14px;
+}
+.chat-b.bot {
+  margin-right: auto;
+  background: #16213e;
+  border: 1px solid #2a2a4a;
+  border-radius: 14px 14px 14px 4px;
+  padding: 8px 14px;
+}
+.chat-b.sys {
+  margin: 0 auto 10px;
+  background: none;
+  border: 1px dashed #f39c1260;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-size: 11px;
+  color: #f39c12;
+  text-align: center;
+  max-width: 90%;
+}
+.chat-sender { font-size: 9px; color: #e94560; margin-bottom: 2px; }
+.hl { color: #e94560; font-weight: 500; }
+.sl { color: #f39c12; font-weight: 500; }
+
+/* 旅程 */
+.journey-flow-mini {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 24px 20px;
+  border: 1px solid #2a2a4a;
+}
+.j-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.j-node {
+  background: #16213e;
+  border: 1px solid #2a2a4a;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+}
+.j-node.h { background: #e9456015; border-color: #e9456040; color: #e94560; font-weight: 600; }
+.j-node.n { background: #f39c1215; border-color: #f39c1240; color: #f39c12; font-weight: 600; }
+.j-arrow { color: #333; font-size: 12px; }
+.j-cycle {
+  text-align: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #2a2a4a;
+  font-size: 15px;
+  font-weight: 700;
+}
+.j-cycle span { color: #e94560; }
+
+/* 两栏布局 */
+.two-col {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.two-col .col { flex: 1; }
+
+/* 横向flex */
+.row { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+.row > * { flex: 1; min-width: 280px; }
+
+/* 收尾 */
+.closing-keywords {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.ck-item {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  background: #1a1a2e;
+  border-radius: 16px;
+  padding: 24px 16px;
+  border: 1px solid #2a2a4a;
+}
+.ck-item h3 { font-size: 16px; margin-bottom: 8px; }
+.ck-item p { font-size: 12px; color: #888; line-height: 1.6; }
+.ck-item:nth-child(1) h3 { color: #4facfe; }
+.ck-item:nth-child(2) h3 { color: #e94560; }
+.ck-item:nth-child(3) h3 { color: #f39c12; }
+</style>
+</head>
+<body>
+
+<!-- 导航 -->
+<div class="nav" id="nav"></div>
+<div class="page-num" id="pageNum">1 / 10</div>
+
+<!-- P1: 封面 -->
+<div class="slide" id="s1">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="slide-label">宝藏品牌升级 · 产品分享</div>
+    <div class="slide-title" style="font-size:48px;">
+      从"买号工具"<br>到<span class="accent">"游戏玩家的宝藏"</span>
+    </div>
+    <div class="slide-subtitle" style="margin:24px auto 0; font-size:16px;">
+      每个玩家都有一个主动、有记忆、有温度的游戏管家
+    </div>
+    <div style="margin-top:40px; font-size:13px; color:#444;">交易猫产品团队 · 2026</div>
+  </div>
+</div>
+
+<!-- P2: 困局 -->
+<div class="slide" id="s2">
+  <div class="slide-inner">
+    <div class="slide-label">Part 1 · 我发现了什么问题</div>
+    <div class="slide-title">交易猫的<span class="accent">困局</span></div>
+    <div class="stat-row" style="margin-bottom:32px;">
+      <div class="stat"><div class="stat-num">14年</div><div class="stat-label">C2C虚拟资产交易</div></div>
+      <div class="stat"><div class="stat-num">6000+</div><div class="stat-label">覆盖游戏</div></div>
+      <div class="stat"><div class="stat-num">7000万+</div><div class="stat-label">用户</div></div>
+    </div>
+    <div class="card">
+      <h3 style="color:#e94560;">⚠️ 核心问题</h3>
+      <p>用户心智 = <strong>"买号卖号的工具"</strong> → 用完即走，没有理由留下来</p>
+      <p style="margin-top:12px;">交易猫只解决了<strong>"账号交易"</strong>这一个环节。一个游戏玩家从入坑到退坑的<strong>全生命周期需求</strong>，我们没有承接。</p>
+    </div>
+  </div>
+</div>
+
+<!-- P3: 玩家旅程 -->
+<div class="slide" id="s3">
+  <div class="slide-inner">
+    <div class="slide-label">Part 1 · 一个三角洲玩家的真实旅程</div>
+    <div class="slide-title">需求真实存在，<span class="accent">但我们没接住</span></div>
+    <div class="compare">
+      <div class="compare-side neg">
+        <h4>❌ 没承接的需求</h4>
+        <ul>
+          <li>新手护航、陪玩带</li>
+          <li>代练上分</li>
+          <li>改名卡、好装备</li>
+          <li>跑刀护航</li>
+          <li>队友匹配</li>
+        </ul>
+        <p style="margin-top:12px; font-size:12px; color:#e94560;">进阶期+深度期 → 玩家去了第三方机构</p>
+      </div>
+      <div class="compare-side pos">
+        <h4>✅ 已承接的需求</h4>
+        <ul>
+          <li>入坑 → 买成品号 ✅</li>
+          <li>深度 → 换号/多开 ✅</li>
+          <li>退坑 → 卖号 ✅</li>
+        </ul>
+        <p style="margin-top:12px; font-size:12px; color:#2ecc71;">只在入坑和退坑环节有存在感</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P4: 什么是宝藏 -->
+<div class="slide" id="s4">
+  <div class="slide-inner">
+    <div class="slide-label">Part 1 · 什么是"宝藏"</div>
+    <div class="slide-title">三个<span class="accent">核心认知</span></div>
+    <ul class="point-list">
+      <li><span class="point-icon">1️⃣</span><span><strong>全生命周期</strong> — 游戏玩家的所有需求，都能在这里解决</span></li>
+      <li><span class="point-icon">2️⃣</span><span><strong>全游戏覆盖</strong> — 6000+长尾是护城河，什么游戏都有解决方案</span></li>
+      <li><span class="point-icon">3️⃣</span><span><strong>专属管家</strong> — 你有一个懂你的游戏管家，主动帮你发现需要什么</span></li>
+    </ul>
+    <div class="card" style="margin-top:24px; text-align:center;">
+      <p style="font-size:14px; color:#888;">类比心智</p>
+      <div style="display:flex; gap:20px; justify-content:center; margin-top:12px;">
+        <div style="text-align:center;"><div style="font-size:18px; font-weight:700;">万能的淘宝</div><div style="font-size:11px; color:#666; margin-top:4px;">搜得到</div></div>
+        <div style="color:#333; font-size:20px; align-self:center;">→</div>
+        <div style="text-align:center;"><div style="font-size:18px; font-weight:700;">万物皆可闲鱼</div><div style="font-size:11px; color:#666; margin-top:4px;">逛得到</div></div>
+        <div style="color:#333; font-size:20px; align-self:center;">→</div>
+        <div style="text-align:center;"><div style="font-size:18px; font-weight:700; color:#e94560;">游戏玩家的宝藏</div><div style="font-size:11px; color:#666; margin-top:4px;">搜得到 + 逛得到 + 留得住</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P5: 游戏管家 -->
+<div class="slide" id="s5">
+  <div class="slide-inner">
+    <div class="slide-label">Part 2 · 产品方案</div>
+    <div class="slide-title">游戏管家 — <span class="accent">全链路服务入口</span></div>
+    <div class="two-col">
+      <div class="col">
+        <ul class="point-list" style="margin-bottom:20px;">
+          <li><span class="point-icon">🎮</span><span>用户认领一款游戏 → 获得专属管家<br>认领越多 → 管家天团越大</span></li>
+          <li><span class="point-icon">🧠</span><span>懂游戏知识 + 懂平台商品 + 知道你的进度</span></li>
+          <li><span class="point-icon">🔔</span><span><strong>主动</strong>：不等用户问，主动推送建议</span></li>
+          <li><span class="point-icon">💾</span><span><strong>有记忆</strong>：每次来不用重新开始</span></li>
+          <li><span class="point-icon">🛡️</span><span><strong>独占壁垒</strong>：豆包能回答问题，但帮你把事办了（监控号价、一键托管、匹配队友）只有管家能做到</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <!-- 手机模拟 -->
+        <div class="phone-mini">
+          <div class="phone-mini-body">
+            <div class="pm-search">🔍 搜游戏、问管家...</div>
+            <div class="pm-label">🎮 我的管家天团</div>
+            <div class="pm-card">
+              <div class="pm-avatar a1">🎯</div>
+              <div class="pm-info"><h4>三角洲管家</h4><p>哈夫币快攒够了，配个改名卡？</p></div>
+              <div class="pm-badge">新消息</div>
+            </div>
+            <div class="pm-card">
+              <div class="pm-avatar a2">👑</div>
+              <div class="pm-info"><h4>王者管家</h4><p>差3星上王者，代练有活动</p></div>
+            </div>
+            <div class="pm-card">
+              <div class="pm-avatar a3">⭐</div>
+              <div class="pm-info"><h4>原神管家</h4><p>新版本快开了，原石够抽吗？</p></div>
+            </div>
+            <div style="margin-top:10px;">
+              <div class="pm-label">🏆 高手技能包</div>
+              <div class="pm-skill-scroll">
+                <div class="pm-skill-card">
+                  <div class="pm-skill-cover s1">🎯</div>
+                  <div class="pm-skill-info"><h5>跑刀进阶</h5><div class="pm-price">¥9.9</div></div>
+                </div>
+                <div class="pm-skill-card">
+                  <div class="pm-skill-cover s2">👑</div>
+                  <div class="pm-skill-info"><h5>冲分指南</h5><div class="pm-price">¥6.9</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P6: 宝藏体验 -->
+<div class="slide" id="s6">
+  <div class="slide-inner">
+    <div class="slide-label">Part 2 · 宝藏体验</div>
+    <div class="slide-title">逛得到 + 搜得到 + <span class="accent">买得到</span></div>
+    <div class="row">
+      <div class="card">
+        <h3 style="color:#e94560;">🛍️ 逛起来 — 参考闲鱼+小黑盒</h3>
+        <ul class="point-list">
+          <li><span class="point-icon">💎</span><span>"今日宝藏"推荐，不想搜也能发现</span></li>
+          <li><span class="point-icon">📖</span><span>卖家故事感："退游忍痛出，希望给有缘人"</span></li>
+          <li><span class="point-icon">📸</span><span>晒号 = 自来水传播</span></li>
+          <li><span class="point-icon">👁</span><span><span class="badge badge-red">新</span> "插眼"标记兴趣 → 降价/更新主动提醒<br><span style="font-size:11px;color:#666;">插眼≠收藏：收藏是"我要用"，插眼是"我想看后续"</span></span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color:#4facfe;">📦 品类沿玩家旅程延伸</h3>
+        <ul class="point-list">
+          <li><span class="point-icon">🎯</span><span>三角洲：成品号 → 护航 → 陪玩 → 代练 → 改名卡</span></li>
+          <li><span class="point-icon">👑</span><span>王者荣耀：成品号 → 代练 → 改名卡 → 皮肤号</span></li>
+          <li><span class="point-icon">⭐</span><span>原神：初始号 → 成品号 → 代肝</span></li>
+        </ul>
+        <p style="margin-top:12px; font-size:12px; color:#888;">每个品类通过管家串联，不需要独立入口<br>先1-2个游戏验证 → 跑通模式 → 复制到长尾</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P7: 技能包 -->
+<div class="slide" id="s7">
+  <div class="slide-inner">
+    <div class="slide-label">Part 2 · 玩家经验也是宝藏</div>
+    <div class="slide-title">高手<span class="accent">技能包</span>交易</div>
+    <div class="two-col">
+      <div class="col">
+        <div class="compare">
+          <div class="compare-side neg">
+            <h4>陪玩（现在）</h4>
+            <p>一对一，按小时收费<br>不可复制<br>高手时间有限</p>
+          </div>
+          <div class="compare-side pos">
+            <h4>技能包（升级后）</h4>
+            <p>一对多，一次上传反复售卖<br>可复制<br>高手躺着也赚钱</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h3 style="color:#f39c12;">🏆 为什么只有交易猫能做</h3>
+          <ul class="point-list">
+            <li><span class="point-icon">1</span><span><strong>数据壁垒</strong>：游戏玩法数据只有我们能采集</span></li>
+            <li><span class="point-icon">2</span><span><strong>平台壁垒</strong>：技能包安装只有管家生态能做</span></li>
+            <li><span class="point-icon">3</span><span><strong>网络效应</strong>：高手越多→技能包越丰富→用户越多</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <h3>卖方（高手）</h3>
+          <p>平台验证段位/战绩 → 打包成"跑刀进阶技能包" → 定价9.9元 → 一次上传反复售卖</p>
+        </div>
+        <div class="card">
+          <h3>买方（新手/进阶）</h3>
+          <p>买了技能包装到管家上 → 管家带有高手经验 → "跑刀优先搜这里，这把枪配这个弹挂性价比最高"</p>
+        </div>
+        <div class="card" style="background:#f39c1210; border-color:#f39c1230;">
+          <p style="font-size:13px; color:#f39c12; text-align:center; font-weight:600;">
+            就像线下家教 → 网课<br>高手经验从一次性服务变成可复制的商品
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P8: 品牌屋+旅程 -->
+<div class="slide" id="s8">
+  <div class="slide-inner">
+    <div class="slide-label">Part 2 · 产品方案全景</div>
+    <div class="slide-title">品牌屋 + <span class="accent">用户旅程闭环</span></div>
+    <div class="brand-house" style="margin-bottom:24px;">
+      <div class="brand-top">🎮 宝藏交易平台</div>
+      <div class="brand-pillars">
+        <div class="pillar rich">
+          <h3>🌊 丰富性→搜得到</h3>
+          <div class="pillar-item">6000+长尾游戏</div>
+          <div class="pillar-item">全生命周期品类</div>
+          <div class="pillar-item"><span class="tag tag-blue">新</span>技能包供给</div>
+        </div>
+        <div class="pillar surprise">
+          <h3>✨ 惊喜感→逛得到</h3>
+          <div class="pillar-item">管家主动推荐</div>
+          <div class="pillar-item"><span class="tag tag-red">新</span>插眼围观</div>
+          <div class="pillar-item"><span class="tag tag-red">新</span>技能包交易</div>
+        </div>
+        <div class="pillar deep">
+          <h3>🔍 可挖掘性→留得住</h3>
+          <div class="pillar-item">授权采集</div>
+          <div class="pillar-item">社区留存</div>
+          <div class="pillar-item"><span class="tag tag-yellow">新</span>高手生态</div>
+        </div>
+      </div>
+      <div class="brand-bottom">🎯 游戏管家天团 — 全品类 × 全游戏 × 全周期</div>
+    </div>
+    <div class="journey-flow-mini">
+      <div class="j-row">
+        <div class="j-node h">搜"三角洲买号"</div><div class="j-arrow">→</div>
+        <div class="j-node n">认领管家</div><div class="j-arrow">→</div>
+        <div class="j-node h">买号</div><div class="j-arrow">→</div>
+        <div class="j-node n">买技能包</div><div class="j-arrow">→</div>
+        <div class="j-node n">管家推护航/改名</div>
+      </div>
+      <div class="j-row">
+        <div class="j-node n">插眼感兴趣的号</div><div class="j-arrow">→</div>
+        <div class="j-node n">逛一逛种草</div><div class="j-arrow">→</div>
+        <div class="j-node n">自己也成高手</div><div class="j-arrow">→</div>
+        <div class="j-node n">卖技能包赚钱💰</div>
+      </div>
+      <div class="j-row">
+        <div class="j-node h">卖号给下一个新手</div><div class="j-arrow">→</div>
+        <div class="j-node h">♻️ 循环</div>
+      </div>
+      <div class="j-cycle"><span>搜得到</span> + <span>逛得到</span> + <span>留得住</span> = 宝藏心智</div>
+    </div>
+  </div>
+</div>
+
+<!-- P9: 落地节奏 -->
+<div class="slide" id="s9">
+  <div class="slide-inner">
+    <div class="slide-label">Part 3 · 怎么验证</div>
+    <div class="slide-title">落地<span class="accent">节奏与里程碑</span></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot red">Q1</div>
+        <div class="tl-title" style="color:#e94560;">夯实基础（现在 - 6月）</div>
+        <div class="tl-desc">
+          游戏管家v2方案确定 + 原型验证<br>
+          玩家旅程调研（3-5个核心游戏）<br>
+          陪玩品类供给调研<br>
+          卖家上架门槛优化 + 商品描述故事化
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot yellow">Q2</div>
+        <div class="tl-title" style="color:#f39c12;">验证跑通（7-9月）</div>
+        <div class="tl-desc">
+          游戏管家小流量AB → 验证主动推荐转化率<br>
+          "今日宝藏"推荐模块上线<br>
+          陪玩品类上线（三角洲等1-2个游戏试点）<br>
+          晒号/社区模块灰度<br>
+          宝藏认证扩展到服务品类
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot blue">Q3</div>
+        <div class="tl-title" style="color:#4facfe;">规模化（10-12月）</div>
+        <div class="tl-desc">
+          游戏管家全量，覆盖多游戏多品类<br>
+          品类扩展到3-5个<br>
+          <strong style="color:#f39c12;">技能包交易试点（1-2个游戏的高手招募）</strong><br>
+          授权采集试点<br>
+          社区正式上线<br>
+          核心指标：7天回访率、跨品类渗透率、社区DAU
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P10: 收尾 -->
+<div class="slide" id="s10">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="slide-label">总结</div>
+    <div class="slide-title">从<span class="accent">"买号工具"</span>到<span class="accent">"游戏玩家的宝藏"</span></div>
+    <div class="closing-keywords">
+      <div class="ck-item">
+        <h3>🌊 丰富性</h3>
+        <p>6000+长尾游戏 × 全生命周期品类<br>AI辅助上架，新游戏第一时间跟进<br>玩家经验变技能包</p>
+      </div>
+      <div class="ck-item">
+        <h3>✨ 惊喜感</h3>
+        <p>管家主动推荐 + 今日宝藏 + 晒号种草<br>插眼围观，轻量表达兴趣<br>管家能办的，豆包办不了</p>
+      </div>
+      <div class="ck-item">
+        <h3>🔍 可挖掘性</h3>
+        <p>深度垂类 + 授权采集 + 社区留存<br>高手生态形成，技能包交易<br>推荐越来越准，用户越来越不想走</p>
+      </div>
+    </div>
+    <div style="margin-top:48px; font-size:20px; font-weight:600;">
+      每个玩家都有一个<br><span style="color:#e94560; font-size:24px;">主动、有记忆、有温度的游戏管家</span>
+    </div>
+    <div style="margin-top:40px; font-size:14px; color:#444;">以上是我的思考，欢迎拍砖 👋</div>
+  </div>
+</div>
+
+<script>
+// 导航点
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('nav');
+const pageNum = document.getElementById('pageNum');
+slides.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => slides[i].scrollIntoView({ behavior: 'smooth' });
+  nav.appendChild(dot);
+});
+// 滚动更新
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = [...slides].indexOf(e.target);
+      document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      pageNum.textContent = `${idx + 1} / ${slides.length}`;
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
